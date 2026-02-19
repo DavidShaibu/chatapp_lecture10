@@ -169,6 +169,19 @@ export default function Chat({ username, onLogout }) {
     return () => document.removeEventListener('click', handler);
   }, [openMenuId]);
 
+  // Reset dragOver when drag ends (e.g. user drags out of window) so it never stays stuck
+  useEffect(() => {
+    const resetDrag = () => setDragOver(false);
+    document.addEventListener('dragend', resetDrag);
+    document.addEventListener('drop', resetDrag);
+    window.addEventListener('blur', resetDrag);
+    return () => {
+      document.removeEventListener('dragend', resetDrag);
+      document.removeEventListener('drop', resetDrag);
+      window.removeEventListener('blur', resetDrag);
+    };
+  }, []);
+
   // ── Session management ──────────────────────────────────────────────────────
 
   const handleNewChat = () => {

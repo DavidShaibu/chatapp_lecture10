@@ -5,6 +5,8 @@
   height: 100vh;
   width: 100%;
   overflow: hidden;
+  pointer-events: auto;
+  position: relative;
 }
 
 /* ── Sidebar ─────────────────────────────────────────────────────────────── */
@@ -285,7 +287,7 @@
   font-size: 1.4rem;
   font-weight: 600;
   color: #fff;
-  pointer-events: none;
+  pointer-events: none; /* never block clicks - drag overlay is visual only */
   z-index: 10;
 }
 
